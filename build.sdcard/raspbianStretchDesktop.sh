@@ -329,7 +329,7 @@ sudo bash -c 'echo "exec \$SCRIPT" >> /home/pi/.bashrc'
 cat > /home/pi/setup.sh <<EOF
 
 # make LCD screen rotation correct
-sudo sed --in-place -i "57s/.*/dtoverlay=tft35a:rotate=270/" /boot/config.txt
+sudo sed --in-place -i "57s/.*/dtoverlay=tft28a:rotate=270/" /boot/config.txt
 
 EOF
 sudo chmod +x /home/pi/setup.sh
@@ -354,10 +354,7 @@ sudo raspi-config nonint do_hostname "RaspiBlitz"
 
 # *** RASPIBLITZ / LCD (at last - because makes a reboot) ***
 # based on https://www.elegoo.com/tutorial/Elegoo%203.5%20inch%20Touch%20Screen%20User%20Manual%20V1.00.2017.10.09.zip
-cd /home/admin/
-sudo apt-mark hold raspberrypi-bootloader
-git clone https://github.com/goodtft/LCD-show.git
-sudo chmod -R 755 LCD-show
-sudo chown -R admin:admin LCD-show
-cd LCD-show/
-sudo ./LCD35-show
+cd ~
+wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh
+chmod +x adafruit-pitft.sh
+sudo ./adafruit-pitft.sh
